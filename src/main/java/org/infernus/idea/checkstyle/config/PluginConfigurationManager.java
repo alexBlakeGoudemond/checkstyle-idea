@@ -61,6 +61,11 @@ public class PluginConfigurationManager {
         }
     }
 
+    public synchronized void invalidate() {
+        cachedConfiguration = null;
+        fireConfigurationChanged();
+    }
+
     private ProjectConfigurationState projectConfigurationState() {
         return project.getService(ProjectConfigurationState.class);
     }

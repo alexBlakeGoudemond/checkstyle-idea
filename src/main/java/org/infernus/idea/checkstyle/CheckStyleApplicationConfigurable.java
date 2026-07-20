@@ -12,6 +12,7 @@ import com.intellij.util.ui.JBUI;
 import org.infernus.idea.checkstyle.checker.CheckerFactoryCache;
 import org.infernus.idea.checkstyle.config.ApplicationConfigurationState;
 import org.infernus.idea.checkstyle.config.ApplicationConfigurationState.GlobalConfigurationLocation;
+import org.infernus.idea.checkstyle.config.PluginConfigurationManager;
 import org.infernus.idea.checkstyle.ui.GlobalLocationDialogue;
 import org.infernus.idea.checkstyle.ui.GlobalLocationTableModel;
 import org.jetbrains.annotations.Nls;
@@ -81,6 +82,86 @@ public class CheckStyleApplicationConfigurable implements Configurable {
         description.setWrapStyleWord(true);
         description.setLineWrap(true);
 
+        final JComponent globalRulesEditor = createGlobalRulesEditor();
+
+        return FormBuilder.createFormBuilder()
+                .addComponent(description)
+                .addLabeledComponent(
+                        CheckStyleBundle.message("config.artefact-repository-base-url-override.label.text"),
+                        artifactRepositoryBaseUrlOverrideField)
+                .addComponent(new TitledSeparator(CheckStyleBundle.message("config.global.section.title")))
+                .addComponent(useGlobalRulesByDefaultCheckbox)
+                .addLabeledComponent(
+                        CheckStyleBundle.message("config.global.locations.label"),
+                        globalRulesEditor,
+                        JBUI.scale(4),
+                        true)
+                .addComponentFillVertically(new JPanel(), 0)
+                .getPanel();
+    }
+
+    @Override
+    public boolean isModified() {
+        return !Objects.equals(
+                normalise(artifactRepositoryBaseUrlOverrideField.getText()),
+                normalise(applicationConfigurationState.getArtifactRepositoryBaseUrlOverride()))
+                || useGlobalRulesByDefaultCheckbox.isSelected() != applicationConfigurationState.isUseGlobalRulesByDefault()
+                || !globalLocationTableModel.getLocations().equals(applicationConfigurationState.getGlobalLocations())
+                || !new HashSet<>(globalLocationTableModel.getActiveIds()).equals(
+                        new HashSet<>(applicationConfigurationState.getActiveGlobalLocationIds()));
+    }
+
+    @Override
+    public void apply() {
+        applicationConfigurationState.setArtifactRepositoryBaseUrlOverride(
+                normalise(artifactRepositoryBaseUrlOverrideField.getText()));
+        applicationConfigurationState.setUseGlobalRulesByDefault(useGlobalRulesByDefaultCheckbox.isSelected());
+        applicationConfigurationState.setGlobalLocations(globalLocationTableModel.getLocations());
+        applicationConfigurationState.setActiveGlobalLocationIds(globalLocationTableModel.getActiveIds());
+
+        if (ApplicationManager.getApplication() == null) {
+            return;
+        }
+
+        // Invalidate checker caches in all open projects so stale global-location checkers are evicted.
+        final ProjectManager projectManager = ProjectManager.getInstanceIfCreated();
+        if (projectManager != null) {
+            for (final Project project : projectManager.getOpenProjects()) {
+                project.getService(CheckerFactoryCache.class).invalidate();
+                project.getService(PluginConfigurationManager.class).invalidate();
+            }
+        }
+    }
+
+    @Override
+    public void reset() {
+        artifactRepositoryBaseUrlOverrideField.setText(
+                Objects.requireNonNullElse(applicationConfigurationState.getArtifactRepositoryBaseUrlOverride(), ""));
+        useGlobalRulesByDefaultCheckbox.setSelected(applicationConfigurationState.isUseGlobalRulesByDefault());
+        globalLocationTableModel.setLocations(
+                applicationConfigurationState.getGlobalLocations(),
+                applicationConfigurationState.getActiveGlobalLocationIds());
+    }
+
+    JTextField getArtifactRepositoryBaseUrlOverrideField() {
+        return artifactRepositoryBaseUrlOverrideField;
+    }
+
+    @Nullable
+    private static String normalise(@Nullable final String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return value.trim();
+    }
+
+    private @NotNull JComponent createGlobalRulesEditor() {
+        if (ApplicationManager.getApplication() == null) {
+            final JScrollPane scrollPane = new JScrollPane(globalLocationTable);
+            scrollPane.setPreferredSize(DECORATOR_DIMENSIONS);
+            return scrollPane;
+        }
+
         final ToolbarDecorator tableDecorator = ToolbarDecorator.createDecorator(globalLocationTable);
         tableDecorator.setAddAction(button -> {
             final GlobalLocationDialogue dialogue = new GlobalLocationDialogue(null);
@@ -111,70 +192,6 @@ public class CheckStyleApplicationConfigurable implements Configurable {
             }
         });
         tableDecorator.setPreferredSize(DECORATOR_DIMENSIONS);
-
-        return FormBuilder.createFormBuilder()
-                .addComponent(description)
-                .addLabeledComponent(
-                        CheckStyleBundle.message("config.artefact-repository-base-url-override.label.text"),
-                        artifactRepositoryBaseUrlOverrideField)
-                .addComponent(new TitledSeparator(CheckStyleBundle.message("config.global.section.title")))
-                .addComponent(useGlobalRulesByDefaultCheckbox)
-                .addLabeledComponent(
-                        CheckStyleBundle.message("config.global.locations.label"),
-                        tableDecorator.createPanel(),
-                        JBUI.scale(4),
-                        true)
-                .addComponentFillVertically(new JPanel(), 0)
-                .getPanel();
-    }
-
-    @Override
-    public boolean isModified() {
-        return !Objects.equals(
-                normalise(artifactRepositoryBaseUrlOverrideField.getText()),
-                normalise(applicationConfigurationState.getArtifactRepositoryBaseUrlOverride()))
-                || useGlobalRulesByDefaultCheckbox.isSelected() != applicationConfigurationState.isUseGlobalRulesByDefault()
-                || !globalLocationTableModel.getLocations().equals(applicationConfigurationState.getGlobalLocations())
-                || !new HashSet<>(globalLocationTableModel.getActiveIds()).equals(
-                        new HashSet<>(applicationConfigurationState.getActiveGlobalLocationIds()));
-    }
-
-    @Override
-    public void apply() {
-        applicationConfigurationState.setArtifactRepositoryBaseUrlOverride(
-                normalise(artifactRepositoryBaseUrlOverrideField.getText()));
-        applicationConfigurationState.setUseGlobalRulesByDefault(useGlobalRulesByDefaultCheckbox.isSelected());
-        applicationConfigurationState.setGlobalLocations(globalLocationTableModel.getLocations());
-        applicationConfigurationState.setActiveGlobalLocationIds(globalLocationTableModel.getActiveIds());
-
-        // Invalidate checker caches in all open projects so stale global-location checkers are evicted.
-        final ProjectManager projectManager = ProjectManager.getInstanceIfCreated();
-        if (projectManager != null) {
-            for (final Project project : projectManager.getOpenProjects()) {
-                project.getService(CheckerFactoryCache.class).invalidate();
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        artifactRepositoryBaseUrlOverrideField.setText(
-                Objects.requireNonNullElse(applicationConfigurationState.getArtifactRepositoryBaseUrlOverride(), ""));
-        useGlobalRulesByDefaultCheckbox.setSelected(applicationConfigurationState.isUseGlobalRulesByDefault());
-        globalLocationTableModel.setLocations(
-                applicationConfigurationState.getGlobalLocations(),
-                applicationConfigurationState.getActiveGlobalLocationIds());
-    }
-
-    JTextField getArtifactRepositoryBaseUrlOverrideField() {
-        return artifactRepositoryBaseUrlOverrideField;
-    }
-
-    @Nullable
-    private static String normalise(@Nullable final String value) {
-        if (value == null || value.isBlank()) {
-            return null;
-        }
-        return value.trim();
+        return tableDecorator.createPanel();
     }
 }
