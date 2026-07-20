@@ -1,0 +1,21 @@
+build.gradle.kts
+  s_a606a8309ff594::t_00ef9edc2aab85 3
+  s_a606a8309ff594::t_13e1674c9f15ce 4
+  s_a606a8309ff594::t_7c7bf4ad25b172 75-87
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b5d188920cd34b59cfcf0f7f47d81b1242513a64",
+  "prompts": {},
+  "sessions": {
+    "s_a606a8309ff594": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "eff32151-1b1b-42bc-8452-770a64a87f04",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
