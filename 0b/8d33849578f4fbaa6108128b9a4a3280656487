@@ -1,0 +1,19 @@
+.ai-resources/GLOBAL-CONFIG.md
+  s_29e51b00745c22::t_86a54a2707401c 1-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "0b8d33849578f4fbaa6108128b9a4a3280656487",
+  "prompts": {},
+  "sessions": {
+    "s_29e51b00745c22": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "fda1330f-d3af-41ad-a7f9-038fddf94af6",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
