@@ -26,3 +26,6 @@ _support/
 /buildSrc/bin/
 /.opencode/
 /.claude/
+# Additional AI Resources
+/.ai-playbook/
+
