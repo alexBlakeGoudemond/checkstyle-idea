@@ -1,0 +1,24 @@
+src/main/java/org/infernus/idea/checkstyle/ui/GlobalLocationDialogue.java
+  s_b4f3a16fb4f7af::t_4a3e74bda756f5 58,62,74-75,78-79,84-110,161
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e72319ac85d413b68fa9b027a9f9e573b58fdf37",
+  "prompts": {},
+  "humans": {
+    "h_1197a506f6c7d6": {
+      "author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_b4f3a16fb4f7af": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a68f23f4-1359-4121-a958-86503dc74688",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
