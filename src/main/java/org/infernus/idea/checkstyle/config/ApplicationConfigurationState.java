@@ -9,6 +9,7 @@ import com.intellij.util.xmlb.annotations.MapAnnotation;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Text;
 import com.intellij.util.xmlb.annotations.XCollection;
+import org.infernus.idea.checkstyle.model.NamedScopeHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -111,6 +112,9 @@ public final class ApplicationConfigurationState
         @Attribute
         public String description;
 
+        @Attribute
+        public String scope;
+
         @Text
         public String location;
 
@@ -124,11 +128,20 @@ public final class ApplicationConfigurationState
         public GlobalConfigurationLocation(final String id,
                                            final String type,
                                            final String location,
-                                           final String description) {
+                                           final String description,
+                                           final String scope) {
             this.id = id;
             this.type = type;
             this.location = location;
             this.description = description;
+            this.scope = scope;
+        }
+
+        public GlobalConfigurationLocation(final String id,
+                                           final String type,
+                                           final String location,
+                                           final String description) {
+            this(id, type, location, description, NamedScopeHelper.DEFAULT_SCOPE_ID);
         }
 
         @Override
@@ -144,12 +157,13 @@ public final class ApplicationConfigurationState
                     && Objects.equals(type, that.type)
                     && Objects.equals(location, that.location)
                     && Objects.equals(description, that.description)
+                    && Objects.equals(scope, that.scope)
                     && Objects.equals(properties, that.properties);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id, type, location, description, properties);
+            return Objects.hash(id, type, location, description, scope, properties);
         }
 
         @Override
@@ -158,6 +172,7 @@ public final class ApplicationConfigurationState
                     + "id='" + id + '\''
                     + ", type='" + type + '\''
                     + ", description='" + description + '\''
+                    + ", scope='" + scope + '\''
                     + ", location='" + location + '\''
                     + '}';
         }
