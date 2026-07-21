@@ -142,7 +142,6 @@ public class CheckStyleApplicationConfigurable implements Configurable {
     private boolean globalSettingsModified() {
         boolean globalSettingsUnchanged = Objects.equals(useGlobalRulesByDefaultCheckbox.isSelected(), applicationConfigurationState.isUseGlobalRulesByDefault())
                 && Objects.equals(globalLocationTableModel.getLocations(), applicationConfigurationState.getGlobalLocations())
-                && Objects.equals(globalLocationTableModel.getLocations(), applicationConfigurationState.getGlobalLocations())
                 && Objects.equals(new HashSet<>(globalLocationTableModel.getActiveIds()), new HashSet<>(applicationConfigurationState.getActiveGlobalLocationIds()));
         return !globalSettingsUnchanged;
     }
