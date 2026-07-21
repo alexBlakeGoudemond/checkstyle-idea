@@ -105,10 +105,15 @@ public class CheckStyleApplicationConfigurable implements Configurable {
         return !Objects.equals(
                 normalise(artifactRepositoryBaseUrlOverrideField.getText()),
                 normalise(applicationConfigurationState.getArtifactRepositoryBaseUrlOverride()))
-                || useGlobalRulesByDefaultCheckbox.isSelected() != applicationConfigurationState.isUseGlobalRulesByDefault()
-                || !globalLocationTableModel.getLocations().equals(applicationConfigurationState.getGlobalLocations())
-                || !new HashSet<>(globalLocationTableModel.getActiveIds()).equals(
-                        new HashSet<>(applicationConfigurationState.getActiveGlobalLocationIds()));
+                || globalSettingsModified();
+    }
+
+    private boolean globalSettingsModified() {
+        boolean globalSettingsUnchanged = Objects.equals(useGlobalRulesByDefaultCheckbox.isSelected(), applicationConfigurationState.isUseGlobalRulesByDefault())
+                && Objects.equals(globalLocationTableModel.getLocations(), applicationConfigurationState.getGlobalLocations())
+                && Objects.equals(globalLocationTableModel.getLocations(), applicationConfigurationState.getGlobalLocations())
+                && Objects.equals(new HashSet<>(globalLocationTableModel.getActiveIds()), new HashSet<>(applicationConfigurationState.getActiveGlobalLocationIds()));
+        return !globalSettingsUnchanged;
     }
 
     @Override
@@ -118,12 +123,16 @@ public class CheckStyleApplicationConfigurable implements Configurable {
         applicationConfigurationState.setUseGlobalRulesByDefault(useGlobalRulesByDefaultCheckbox.isSelected());
         applicationConfigurationState.setGlobalLocations(globalLocationTableModel.getLocations());
         applicationConfigurationState.setActiveGlobalLocationIds(globalLocationTableModel.getActiveIds());
-
         if (ApplicationManager.getApplication() == null) {
             return;
         }
+        invalidateCheckerCaches();
+    }
 
-        // Invalidate checker caches in all open projects so stale global-location checkers are evicted.
+    /**
+     * Invalidate checker caches in all open projects, so stale global-location checkers are evicted.
+     */
+    private void invalidateCheckerCaches() {
         final ProjectManager projectManager = ProjectManager.getInstanceIfCreated();
         if (projectManager != null) {
             for (final Project project : projectManager.getOpenProjects()) {
@@ -161,8 +170,13 @@ public class CheckStyleApplicationConfigurable implements Configurable {
             scrollPane.setPreferredSize(DECORATOR_DIMENSIONS);
             return scrollPane;
         }
-
         final ToolbarDecorator tableDecorator = ToolbarDecorator.createDecorator(globalLocationTable);
+        addActionButtons(tableDecorator);
+        tableDecorator.setPreferredSize(DECORATOR_DIMENSIONS);
+        return tableDecorator.createPanel();
+    }
+
+    private void addActionButtons(ToolbarDecorator tableDecorator) {
         tableDecorator.setAddAction(button -> {
             final GlobalLocationDialogue dialogue = new GlobalLocationDialogue(null);
             if (dialogue.showAndGet()) {
@@ -191,7 +205,6 @@ public class CheckStyleApplicationConfigurable implements Configurable {
                 globalLocationTableModel.removeLocationAt(selectedRow);
             }
         });
-        tableDecorator.setPreferredSize(DECORATOR_DIMENSIONS);
-        return tableDecorator.createPanel();
     }
+
 }
