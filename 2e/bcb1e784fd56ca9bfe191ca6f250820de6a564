@@ -1,0 +1,30 @@
+src/main/java/org/infernus/idea/checkstyle/CheckStyleApplicationConfigurable.java
+  s_b8924d6abd60ea::t_0d36953caebf27 212-213
+  s_74c1dea6f5f2f1::t_f6c38c5ce298b8 187
+  s_74c1dea6f5f2f1::t_2e048cace4aecb 188-189
+  s_b8924d6abd60ea::t_9aac01f43b672b 167
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "2ebcb1e784fd56ca9bfe191ca6f250820de6a564",
+  "prompts": {},
+  "sessions": {
+    "s_74c1dea6f5f2f1": {
+      "agent_id": {
+        "tool": "github-copilot-jetbrains",
+        "id": "1788489706565",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    },
+    "s_b8924d6abd60ea": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "ffc7343e-ded4-4e5e-b67e-0b79ecbaa0b0",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
