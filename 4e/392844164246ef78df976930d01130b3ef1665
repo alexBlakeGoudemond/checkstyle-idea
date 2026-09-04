@@ -1,0 +1,19 @@
+src/main/java/org/infernus/idea/checkstyle/toolwindow/CheckStyleToolWindowPanel.java
+  s_b8924d6abd60ea::t_12b6109396bc21 38-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "4e392844164246ef78df976930d01130b3ef1665",
+  "prompts": {},
+  "sessions": {
+    "s_b8924d6abd60ea": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "ffc7343e-ded4-4e5e-b67e-0b79ecbaa0b0",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
