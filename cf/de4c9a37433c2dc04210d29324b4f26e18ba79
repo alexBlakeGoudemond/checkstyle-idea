@@ -1,0 +1,27 @@
+src/test/java/org/infernus/idea/checkstyle/config/PluginConfigurationManagerTest.java
+  s_b8924d6abd60ea::t_924bb55c7a9873 1-112
+src/test/java/org/infernus/idea/checkstyle/config/ConfigurationLocationSourceTest.java
+  s_b8924d6abd60ea::t_924bb55c7a9873 3-4,9-11,14,16-19,21,25,27,70-167
+src/test/java/org/infernus/idea/checkstyle/config/ApplicationConfigurationStateTest.java
+  s_b8924d6abd60ea::t_924bb55c7a9873 3,6-9,12-13,37-40,48-103
+src/test/java/org/infernus/idea/checkstyle/ui/GlobalLocationTableModelTest.java
+  s_b8924d6abd60ea::t_924bb55c7a9873 1-90
+src/test/java/org/infernus/idea/checkstyle/CheckStyleApplicationConfigurableTest.java
+  s_b8924d6abd60ea::t_d6279545fe3c0a 5,9,11,13,105,127,194,199-254
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "cfde4c9a37433c2dc04210d29324b4f26e18ba79",
+  "prompts": {},
+  "sessions": {
+    "s_b8924d6abd60ea": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "ffc7343e-ded4-4e5e-b67e-0b79ecbaa0b0",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
