@@ -1,0 +1,51 @@
+src/main/java/org/infernus/idea/checkstyle/CheckStyleApplicationConfigurable.java
+  s_b4f3a16fb4f7af::t_b3b10350386350 5-9,12,17,24-25,36-37,40,45-50,82-90,100-103
+  h_1197a506f6c7d6 14,18
+  s_b4f3a16fb4f7af::t_2efc782183ad24 104-106
+src/main/java/org/infernus/idea/checkstyle/ui/GlobalLocationTableModel.java
+  s_b4f3a16fb4f7af::t_9a547cbab38eb0 1-140
+src/main/java/org/infernus/idea/checkstyle/config/ConfigurationLocationSource.java
+  s_b4f3a16fb4f7af::t_1f481d82562bda 3-4,8-9,14,22-23,54-62,64-65,75,80,89,111
+  s_6711f09dbc25ac::t_72ab3b604a444d 63
+  s_b4f3a16fb4f7af::t_c58e74741d55d9 66-68,72-74
+  s_b4f3a16fb4f7af::t_5bd26b4fba3113 76-79
+  s_b4f3a16fb4f7af::t_6302e8677880fa 81-83,86-88
+  s_b4f3a16fb4f7af::t_063536df718e46 90-92,108-110
+src/main/java/org/infernus/idea/checkstyle/config/ApplicationConfigurationState.java
+  h_1197a506f6c7d6 68,71,74,77
+  s_b4f3a16fb4f7af::t_54c99e47a4f1bf 7-8,10-11,15-22,53-67,69-70,72-73,75-76,78,94,98-110,112-127
+  s_b4f3a16fb4f7af::t_3b2af8c0e828e0 128-130
+src/main/java/org/infernus/idea/checkstyle/ui/GlobalLocationDialogue.java
+  s_b4f3a16fb4f7af::t_fc79706cc5bdfa 1-144
+src/main/resources/org/infernus/idea/checkstyle/CheckStyleBundle.properties
+  s_b4f3a16fb4f7af::t_0e02e0ac8b0c03 142-149
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "fc540ff4d0bb92f3872c1d52fff9c4c8fcd43108",
+  "prompts": {},
+  "humans": {
+    "h_1197a506f6c7d6": {
+      "author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_6711f09dbc25ac": {
+      "agent_id": {
+        "tool": "github-copilot-jetbrains",
+        "id": "1784577743503",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    },
+    "s_b4f3a16fb4f7af": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a68f23f4-1359-4121-a958-86503dc74688",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}

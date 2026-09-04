@@ -1,0 +1,33 @@
+src/main/java/org/infernus/idea/checkstyle/CheckStyleApplicationConfigurable.java
+  s_b4f3a16fb4f7af::t_7aec2c947d9951 17
+  s_b4f3a16fb4f7af::t_6090385a5a1f2b 100,117,182,222,228-264,266-267
+src/main/java/org/infernus/idea/checkstyle/toolwindow/CheckStyleToolWindowPanel.java
+  s_b4f3a16fb4f7af::t_0fe4b796e52705 7,19,24
+  s_b4f3a16fb4f7af::t_5ccc94a913b7a7 207-211,479-523
+.ai-resources/GLOBAL-CONFIG.md
+  s_b4f3a16fb4f7af::t_2d2b4bc36b1e71 1,3,5,7,9,11-13,15
+  s_b4f3a16fb4f7af::t_f0f282c39dc8f2 17,19-21,23,25-26
+src/main/java/org/infernus/idea/checkstyle/config/PluginConfigurationManager.java
+  s_b4f3a16fb4f7af::t_4c0433460de8b8 76-80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "1d5ccf59559af6c70913f7ef9683bb9d1812d893",
+  "prompts": {},
+  "humans": {
+    "h_1197a506f6c7d6": {
+      "author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_b4f3a16fb4f7af": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a68f23f4-1359-4121-a958-86503dc74688",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+src/main/java/org/infernus/idea/checkstyle/CheckStyleApplicationConfigurable.java
+  s_b4f3a16fb4f7af::t_b3b10350386350 39
+  h_1197a506f6c7d6 25,38,40
+src/main/java/org/infernus/idea/checkstyle/ui/GlobalLocationDialogue.java
+  s_b4f3a16fb4f7af::t_2efbf04dfdffde 73,76-92,94-100
+src/main/java/org/infernus/idea/checkstyle/ui/GlobalLocationTableModel.java
+  s_b4f3a16fb4f7af::t_c1a4a2510cf8eb 5,141
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d277324d72fed53540605b4924e7846d0d2210be",
+  "prompts": {},
+  "humans": {
+    "h_1197a506f6c7d6": {
+      "author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_b4f3a16fb4f7af": {
+      "agent_id": {
+        "tool": "github-copilot-cli",
+        "id": "a68f23f4-1359-4121-a958-86503dc74688",
+        "model": "unknown"
+      },
+      "human_author": "Alex Blake-Goudemond <alexgoudemond@gmail.com>"
+    }
+  }
+}
