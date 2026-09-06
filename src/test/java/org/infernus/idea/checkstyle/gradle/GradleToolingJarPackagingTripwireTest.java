@@ -2,6 +2,7 @@ package org.infernus.idea.checkstyle.gradle;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,6 +59,31 @@ class GradleToolingJarPackagingTripwireTest {
                 final String name = entries.nextElement().getName();
                 assertFalse(name.startsWith("com/intellij/"),
                         "gradleToolingJar must contain no IntelliJ platform classes, found: " + name);
+            }
+        }
+    }
+
+    @Test
+    void jarClassesTargetNoNewerThanJava17() throws IOException {
+        // class file major_version 61 == Java 17; the target project's own Gradle daemon may run an
+        // older JDK than the one used to build this plugin, and cannot load classes above its own version.
+        final int maxSupportedMajorVersion = 61;
+
+        try (JarFile jarFile = new JarFile(gradleToolingJarFile())) {
+            final Enumeration<JarEntry> entries = jarFile.entries();
+            while (entries.hasMoreElements()) {
+                final JarEntry entry = entries.nextElement();
+                if (!entry.getName().endsWith(".class")) {
+                    continue;
+                }
+
+                try (DataInputStream stream = new DataInputStream(jarFile.getInputStream(entry))) {
+                    stream.skipBytes(6); // magic (4 bytes) + minor_version (2 bytes)
+                    final int majorVersion = stream.readUnsignedShort();
+                    assertTrue(majorVersion <= maxSupportedMajorVersion,
+                            entry.getName() + " has class file major version " + majorVersion
+                                    + ", which is newer than Java 17 (" + maxSupportedMajorVersion + ")");
+                }
             }
         }
     }

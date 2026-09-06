@@ -115,6 +115,14 @@ configurations.configureEach {
 val gradleTooling: SourceSet = sourceSets.create("gradleTooling")
 val gradleToolingTest: SourceSet = sourceSets.create("gradleToolingTest")
 
+tasks.named<JavaCompile>("compileGradleToolingJava") {
+    // Runs inside an arbitrary target project's own Gradle daemon (see the gradleTooling source-set
+    // comment above), not the IDE's bundled JDK — must stay loadable on older daemon JVMs than this
+    // plugin's own JDK-21 toolchain. 17 is an LTS baseline (not 16, the actual language-feature floor for
+    // CheckstyleGradleModelBuilder's pattern-matching instanceof) chosen to match common daemon JVMs.
+    options.release.set(17)
+}
+
 dependencies {
     intellijPlatform {
         intellijIdeaCommunity(libs.versions.intellij.idea.community.get())
