@@ -1,7 +1,7 @@
 
 # CheckStyle-IDEA Changelog
 
-* **26.18.1** Fixed: "Import settings from Gradle" no longer fails Gradle sync with "compiled by a more recent version of the Java Runtime" when the target project's Gradle daemon runs an older JDK than the one used to build the plugin (#704).
+* **26.18.1** Fixed: "Import settings from Gradle" no longer fails Gradle sync with "compiled by a more recent version of the Java Runtime" when the target project's Gradle daemon runs an older JDK (>=17) than the one used to build the plugin (#704).
 * **26.18.0** Fixed: "Import settings from Maven" now resolves a `<configLocation>` that lives inside a third-party rules JAR even when the POM declares a Checkstyle engine version that isn't bundled with the plugin, downloading it on demand instead of silently dropping the location (#703).
 * **26.18.0** Fixed: Failures downloading a non-bundled Checkstyle version, and Maven auto-import needing one, now report the real underlying reason (e.g. the HTTP status, TLS, or DNS error) instead of a bare, contextless message (#702).
 * **26.18.0** Fixed: Third-party Checkstyle check JARs (`thirdPartyClasspath`) are no longer loaded in untrusted projects, closing a remote code execution vector where a malicious project's `.idea/checkstyle-idea.xml` could point at an attacker-controlled JAR. Third-party checks — and any rules file resolved via the third-party classpath rather than a plain file — activate automatically once the project is trusted.
